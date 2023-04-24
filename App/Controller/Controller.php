@@ -6,6 +6,7 @@ use Exception;
 abstract class Controller
 {
 
+    /* Converte o dado para json */
     protected static function getResponseAsJSON($data)
     {
         header("Access-Control-Allow-Origin: *");
@@ -16,6 +17,20 @@ abstract class Controller
 
         exit(json_encode($data));
 
+    }
+
+    /* Dá uma resposta ao servidor como json */
+    protected static function setResponseAsJSON($data, $request_status = true)
+    {
+        $response = array('response_data' => $data, 'response_successful' => $request_status);
+
+        header("Access-Control-Allow-Origin: *");
+        header("Content-type: application/json; charset=utf-8");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Pragma: public");
+
+        exit(json_encode($response));
     }
 
     protected static function getExceptionAsJSON(Exception $e)

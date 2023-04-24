@@ -7,12 +7,7 @@ use Exception;
 
 class TransacaoController extends Controller{
 
-    public static function index()
-    {
-
-    }
-
-    public static function form()
+    public static function list()
     {
 
     }

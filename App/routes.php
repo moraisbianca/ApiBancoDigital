@@ -12,24 +12,28 @@ $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 switch($url)
 {
-    case 'correntista/index':
-
+    /**
+     * Método: POST
+     * Exemplo: http://10.0.2.2/correntista/save
+     */
+    case '/correntista/save':
+        CorrentistaController::save();
     break;
 
-    case 'correntista/form':
-
+    /**
+     * Método GET
+     * Exemplo de Acesso: http://10.0.2.2/correntista
+     */
+    case '/correntista':
+        CorrentistaController::list();
     break;
 
-    case 'correntista/save':
-
-    break;
-    
-    case 'correntista/entrar':
-
-    break;
-
-    case 'correntista/delete':
-
+    /**
+     * Método GET
+     * Exemplo de Acesso: http://10.0.2.2/correntista/delete?id=1
+     */
+    case '/correntista/delete':
+        CorrentistaController::delete();
     break;
     
 
