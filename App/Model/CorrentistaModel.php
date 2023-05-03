@@ -16,17 +16,11 @@ class CorrentistaModel extends Model
             (new CorrentistaDAO())->update($this);
     }
 
-    /**
-     * 
-     */
     public function getAllRows()
     {
         $this->rows = (new CorrentistaDAO())->select();
     }
 
-    /**
-     * 
-     */
     public function delete()
     {
         (new CorrentistaDAO())->delete($this->id);

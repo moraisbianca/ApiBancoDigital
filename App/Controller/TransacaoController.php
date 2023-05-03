@@ -7,12 +7,17 @@ use Exception;
 
 class TransacaoController extends Controller{
 
-    public static function list()
+    public static function save()
     {
 
     }
 
-    public static function save()
+    public static function select()
+    {
+
+    }
+
+    public static function update()
     {
 
     }

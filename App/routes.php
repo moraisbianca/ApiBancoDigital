@@ -8,66 +8,39 @@ use App\Controller\
     TransacaoController
 };
 
+if(!isset($_SESSION['dados_usuario'])) {
+    header("location: login.php");
+}
+
+if(isset($_GET['sair']))
+{
+    session_destroy();
+    header("location: login.php");
+}
+
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 switch($url)
 {
-    /**
-     * Método: POST
-     * Exemplo: http://10.0.2.2/correntista/save
-     */
     case '/correntista/save':
         CorrentistaController::save();
     break;
 
-    /**
-     * Método GET
-     * Exemplo de Acesso: http://10.0.2.2/correntista
-     */
-    case '/correntista':
-        CorrentistaController::list();
-    break;
-
-    /**
-     * Método GET
-     * Exemplo de Acesso: http://10.0.2.2/correntista/delete?id=1
-     */
-    case '/correntista/delete':
-        CorrentistaController::delete();
-    break;
-    
-
-    case 'conta/index':
-
-    break;
-
-    case 'conta/form':
-
-    break;
-
-    case 'conta/save':
-
-    break;
-
-    case 'conta/delete':
-
+    case '/correntista/entrar':
+        CorrentistaController::auth();
     break;
 
     case 'conta/extrato':
-
+        ContaController::extrato();
     break;
     
     case 'conta/pix/enviar':
-    
+        ContaController::enviarpix();
     break;
     
     case 'conta/pix/receber':
-    
+        ContaController::receberpix();
     break;
-
-    //
-
-
 
     default:
         echo("oi");

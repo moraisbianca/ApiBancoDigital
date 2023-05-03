@@ -35,6 +35,20 @@ class CorrentistaDAO extends DAO
         return $stmt->execute();
     }
 
+    public function autenticar(CorrentistaModel $model)
+    {
+        $sql = "SELECT id, nome FROM usuario WHERE usuario = ? AND senha = ? ";
+
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(1, $usuario_digitado);
+            $stmt->bindValue(2, sha1($senha_digitada));
+            $stmt->execute();
+
+            $dados_usuario = $stmt->fetchObject();
+    }
+
+    
+
     public function update(CorrentistaModel $model)
     {
         $sql = "UPDATE correntista SET nome=?, cpf=?, data_nasc=?, senha=? WHERE id=? ";
@@ -49,9 +63,7 @@ class CorrentistaDAO extends DAO
         return $stmt->execute();
     }
 
-    /**
-     * 
-     */
+
     public function delete(int $id) : bool
     {
         $sql = "DELETE FROM correntista WHERE id=?";
