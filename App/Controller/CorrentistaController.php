@@ -31,28 +31,9 @@ class CorrentistaController extends Controller
 
     public static function auth()
     {
-        try {
+        $json_obj = parent::getJSONFromRequest();
 
-            session_start();
-
-            $usuario_digitado = $_REQUEST['usuario'];
-            $senha_digitada = $_REQUEST['senha'];
-
-            
-
-
-            // Comparando o certo com o digitado.
-            if ($dados_usuario) {
-
-                $_SESSION['dados_usuario'] = $dados_usuario;
-                header("Location: index.php");
-            } else {
-
-                header("Location: login.php?erro=true");
-            }
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
+		$model = new CorrentistaModel();
     }
 
     public static function select()

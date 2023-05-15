@@ -1,7 +1,7 @@
 <?php
 
 namespace App\DAO;
-
+use PDO;
 use App\Model\CorrentistaModel;
 
 class CorrentistaDAO extends DAO
@@ -10,16 +10,6 @@ class CorrentistaDAO extends DAO
     public function __construct()
     {
         parent::__construct();       
-    }
-
-    public function select()
-    {
-        $sql = "SELECT * FROM correntista ";
-
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->execute();
-
-        return $stmt->fetchAll(DAO::FETCH_CLASS);
     }
 
     public function insert(CorrentistaModel $model) : bool
@@ -32,23 +22,9 @@ class CorrentistaDAO extends DAO
         $stmt->bindValue(3, $model->data_nasc);
         $stmt->bindValue(4, $model->senha);
 
-        return $stmt->execute();
+        return $this->conexao->lastInsertId();
     }
-
-    public function autenticar(CorrentistaModel $model)
-    {
-        $sql = "SELECT id, nome FROM usuario WHERE usuario = ? AND senha = ? ";
-
-            $stmt = $this->conexao->prepare($sql);
-            $stmt->bindValue(1, $usuario_digitado);
-            $stmt->bindValue(2, sha1($senha_digitada));
-            $stmt->execute();
-
-            $dados_usuario = $stmt->fetchObject();
-    }
-
     
-
     public function update(CorrentistaModel $model)
     {
         $sql = "UPDATE correntista SET nome=?, cpf=?, data_nasc=?, senha=? WHERE id=? ";
@@ -61,6 +37,41 @@ class CorrentistaDAO extends DAO
         $stmt->bindValue(5, $model->id);
 
         return $stmt->execute();
+    }
+
+    public function select()
+    {
+        $sql = "SELECT * FROM correntista ";
+
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(DAO::FETCH_CLASS);
+    }
+
+    public function selectById($id)
+    {
+        $sql = "SELECT * FROM correntista c WHERE id = ?";
+
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(1, $id);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS);
+    }
+
+    public function getCorrentistaByCpfAndSenha($cpf, $senha)
+    {
+        $sql = "SELECT * FROM correntista c WHERE cpf = ? AND senha = sha1(?)";
+
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(1, $cpf);
+        $stmt->bindValue(2, $senha);
+
+        $stmt->execute();
+
+        return $stmt->fetchObject();
     }
 
 
