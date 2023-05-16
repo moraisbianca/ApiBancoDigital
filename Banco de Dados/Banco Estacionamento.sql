@@ -4,9 +4,9 @@ use db_banco_digital;
 create table correntista(
 	id int auto_increment not null,
 	nome varchar(255) not null,
-    cpf int unique not null,
-    data_nasc date not null,
-    senha int not null,
+    cpf varchar(11) unique not null,
+    data_nasc varchar(8) not null,
+    senha varchar(20) not null,
 	primary key(id)
 );
 

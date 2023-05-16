@@ -16,13 +16,14 @@ class CorrentistaController extends Controller
             $json_obj = json_decode(file_get_contents('php://input'));
 
             $model = new CorrentistaModel();
-            $model->id = $json_obj->id;
-            $model->nome = $json_obj->nome;
-            $model->cpf = $json_obj->cpf;
-            $model->data_nasc = $json_obj->data_nasc;
-            $model->senha = $json_obj->senha;
+            $model->id = $json_obj->Id;
+            $model->nome = $json_obj->Nome;
+            $model->cpf = $json_obj->Cpf;
+            $model->data_nasc = $json_obj->DataNasc;
+            $model->senha = $json_obj->Senha;
 
-            $model->save();
+            parent::getResponseAsJSON($model->save());
+
         } catch (Exception $e) {
 
             parent::getExceptionAsJSON($e);
