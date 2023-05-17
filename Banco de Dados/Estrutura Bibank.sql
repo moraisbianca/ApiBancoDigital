@@ -5,8 +5,8 @@ create table correntista(
 	id int auto_increment not null,
 	nome varchar(255) not null,
     cpf varchar(11) unique not null,
-    data_nasc varchar(8) not null,
-    senha varchar(20) not null,
+    data_nasc datetime not null,
+    senha varchar(100) not null,
 	primary key(id)
 );
 
