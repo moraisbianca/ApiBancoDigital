@@ -32,7 +32,8 @@ class CorrentistaModel extends Model
 
 
 	public function auth($cpf, $senha){
-		$dao = new CorrentistaDAO();
+		
+        $dao = new CorrentistaDAO();
 
 		return $dao->getCorrentistaByCpfAndSenha($cpf, $senha);		
 	}
