@@ -27,6 +27,11 @@ class CorrentistaDAO extends DAO
 
         return $model;
     }
+
+    public function save(CorrentistaModel $m) : CorrentistaModel
+    {
+        return ($m->id == null) ? $this->insert($m) : $this->update($m);
+    }
     
     public function update(CorrentistaModel $model)
     {
