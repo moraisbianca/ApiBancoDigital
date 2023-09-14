@@ -8,7 +8,7 @@ use App\DAO\CorrentistaDAO;
 class CorrentistaModel extends Model
 {
     public $id, $nome, $cpf, $data_nasc, $senha;
-    public $rows_contas;
+    public $rows_contas = [];
     
     public function save() : ?CorrentistaModel
     {
@@ -47,11 +47,6 @@ class CorrentistaModel extends Model
         return $model_preenchido; 
     }
 
-
-
-
-
-
     public function getAllRows()
     {
         $this->rows = (new CorrentistaDAO())->select();
@@ -70,7 +65,11 @@ class CorrentistaModel extends Model
 		
         $dao = new CorrentistaDAO();
 
-		return $dao->getCorrentistaByCpfAndSenha($cpf, $senha);		
+		$dados_correntista = $dao -> getCorrentistaByCpfAndSenha($cpf, $senha);		
+
+        $dados_correntista-> rows_contas = (new ContaDAO())->selectByIdCorrentista($dados_correntista->id);
+
+        return $dados_correntista;
 	}
     
 

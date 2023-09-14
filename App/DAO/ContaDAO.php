@@ -75,6 +75,18 @@ class ContaDAO extends DAO
         return $stmt->fetchAll(PDO::FETCH_CLASS);
     }
 
+    public function selectByIdCorrentista($id)
+    {
+        $sql = "SELECT * FROM conta WHERE id_correntista = ?";
+
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(1, $id);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(DAO::FETCH_CLASS, "App\Model\ContaModel");
+    }
+
     public function delete($id)
     {
         $sql = "DELETE FROM conta WHERE id = ?";
