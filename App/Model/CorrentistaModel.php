@@ -44,6 +44,8 @@ class CorrentistaModel extends Model
             $model_preenchido->rows_contas[] = $conta_poupanca;
         }
 
+        //var_dump($model_preenchido);
+
         return $model_preenchido; 
     }
 
@@ -67,7 +69,7 @@ class CorrentistaModel extends Model
 
 		$dados_correntista = $dao -> getCorrentistaByCpfAndSenha($cpf, $senha);		
 
-        $dados_correntista-> rows_contas = (new ContaDAO())->selectByIdCorrentista($dados_correntista->id);
+        $dados_correntista->rows_contas = (new ContaDAO())->selectByIdCorrentista($dados_correntista->id);
 
         return $dados_correntista;
 	}
