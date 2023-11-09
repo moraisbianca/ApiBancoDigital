@@ -29,10 +29,10 @@ class ChaveModel extends Model {
 		$dao->delete($id);
 	}
 
-	public function getById(int $id) 
-	{
-		$dao = new ChaveDAO();
+	public function GetChavePixByIdConta(int $id_conta){
 
-		$this->rows = $dao->selectById($id);
-	}
+        $dao = new ChaveDAO();
+
+        $this->rows = $dao->selectById($id_conta);
+    }
 }
